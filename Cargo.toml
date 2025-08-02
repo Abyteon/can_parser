@@ -1,0 +1,60 @@
+[package]
+name = "can_parser"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# 异步运行时
+tokio = { version = "1.0", features = ["full", "rt-multi-thread", "net", "io-util"] }
+futures = "0.3"
+# 内存池
+object-pool = "0.6"
+# 压缩解压
+flate2 = "1.0"
+# 序列化
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+# 错误处理
+anyhow = "1.0"
+thiserror = "1.0"
+# 日志
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+# 性能监控
+metrics = "0.24"
+metrics-exporter-prometheus = "0.17"
+# CPU核心数
+num_cpus = "1.0"
+# 并发数据结构
+crossbeam-channel = "0.5"
+dashmap = "6.1"
+# 并行处理
+rayon = "1.10"
+# 缓存
+cached = "0.56"
+# 文件处理
+memmap2 = "0.9"
+# 字节处理
+byteorder = "1.4"
+bytes = "1.5"
+# 数据库（可选）
+sqlx = { version = "0.7", features = ["runtime-tokio-rustls", "postgres"], optional = true }
+# 配置管理
+config = "0.13"
+# 命令行参数
+clap = { version = "4.0", features = ["derive"] }
+# 进度条  
+indicatif = "0.18"
+# 时间处理
+chrono = { version = "0.4", features = ["serde"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+
+[profile.dev]
+opt-level = 1
+debug = true 
